@@ -1,0 +1,52 @@
+<div class="project-container">
+  <button mat-raised-button color="primary" class="project-button" routerLink='/projects/create'>
+    Create project
+  </button>
+  <button mat-raised-button class="project-button" routerLink='/technologies'>
+    View all technologies
+  </button>
+</div>
+
+<table mat-table [dataSource]="projectList" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef> Start date </th>
+    <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef> End date </th>
+    <td mat-cell *matCellDef="let element"> {{element.end_date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button class="project-button" [routerLink]="['/projects', element.id, 'update']">
+        Edit
+      </button>
+      <button mat-raised-button color="warn" (click)="openDialog((element.id).toString())" class="project-button">
+        Remove
+      </button>
+      <button mat-raised-button class="project-button" [routerLink]="['/projects', element.id, 'developers']">
+        View developer
+      </button>
+      <button mat-raised-button class="project-button" [routerLink]="['/projects', element.id, 'technologies']">
+        View technology
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

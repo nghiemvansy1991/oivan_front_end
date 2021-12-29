@@ -1,0 +1,32 @@
+<div class="developer-container">
+  <button mat-raised-button class="developer-button" routerLink="/projects">
+    Back project list
+  </button>
+</div>
+
+<table mat-table [dataSource]="developerList" class="mat-elevation-z8">
+  <ng-container matColumnDef="first_name">
+    <th mat-header-cell *matHeaderCellDef> First name </th>
+    <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="last_name">
+    <th mat-header-cell *matHeaderCellDef> Last name </th>
+    <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button class="developer-button" [routerLink]="['/projects', projectId, 'developers', element.id, 'update']">
+        Edit
+      </button>
+      <button mat-raised-button color="warn" (click)="openDialog((element.id).toString())" class="developer-button">
+        Remove
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

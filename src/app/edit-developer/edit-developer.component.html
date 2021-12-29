@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="developerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field-full-width" appearance="fill">
+      <mat-label>First name</mat-label>
+      <input matInput placeholder="First Name" formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field class="form-field-full-width" appearance="fill">
+      <mat-label>Last name</mat-label>
+      <input matInput placeholder="Last Name" formControlName="lastName">
+    </mat-form-field>
+
+    <span *ngIf="developerId;else create_button">
+      <button mat-raised-button type="submit" [disabled]="!developerForm.valid" class="developer-submit-button">
+        Edit
+      </button>
+    </span>
+
+    <ng-template #create_button>
+      <button mat-raised-button type="submit" [disabled]="!developerForm.valid" class="developer-submit-button">
+        Create
+      </button>
+    </ng-template>
+
+    <button mat-raised-button class="developer-back-button" (click)="backDeveloperList()">
+      Back
+    </button>
+  </form>
+</div>

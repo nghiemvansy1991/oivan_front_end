@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="technologyForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error>
+        <span *ngIf="technologyForm.get('name')?.errors?.['required']">
+          Name is required
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <span *ngIf="technologyId;else create_button">
+      <button mat-raised-button type="submit" [disabled]="!technologyForm.valid" class="technology-submit-button">
+        Edit
+      </button>
+    </span>
+
+    <ng-template #create_button>
+      <button mat-raised-button type="submit" [disabled]="!technologyForm.valid" class="technology-submit-button">
+        Create
+      </button>
+    </ng-template>
+
+    <button mat-raised-button class="technology-back-button" (click)="backTechnologyList()">
+      Back
+    </button>
+  </form>
+</div>

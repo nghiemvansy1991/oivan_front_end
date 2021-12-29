@@ -1,0 +1,46 @@
+<div class="container">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-field-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error>
+        <span *ngIf="projectForm.get('name')?.errors?.['required']">
+          Name is required
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      <mat-error>
+        <span *ngIf="projectForm.get('description')?.errors?.['required']">
+          Description is required
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="primary" class="form-field-full-width" appearance="fill">
+      <mat-label>End date</mat-label>
+      <input matInput [matDatepicker]="endDate" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+    </mat-form-field>
+
+    <span *ngIf="projectId;else create_button">
+      <button mat-raised-button type="submit" [disabled]="!projectForm.valid" class="project-submit-button">
+        Edit
+      </button>
+    </span>
+
+    <ng-template #create_button>
+      <button mat-raised-button type="submit" [disabled]="!projectForm.valid" class="project-submit-button">
+        Create
+      </button>
+    </ng-template>
+
+    <button mat-raised-button class="project-back-button" (click)="backProjectList()">
+      Back
+    </button>
+  </form>
+</div>
